@@ -54,7 +54,7 @@ $ MicroXRCEAgent udp -p 2018 -v 6
 $ ros2 run joy joy_node
 ```
 
-### Run joy_node
+### Run teleop_node
 ```
 $ ros2 run teleop_twist_joy teleop_node
 ```
