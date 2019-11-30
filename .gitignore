@@ -1,0 +1,4 @@
+.*
+!/.gitignore
+
+main/network_config.h
