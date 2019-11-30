@@ -7,8 +7,8 @@
 
 #define USE_SERIAL_DEBUG
 
-Motor left_wheel = Motor(26, 27, A16, 12, 0, false);
-Motor right_wheel = Motor(25, 33, A4, 12, 1, false);
+Motor left_wheel = Motor(27, 26, A16, 12, 0, true);
+Motor right_wheel = Motor(33, 25, A4, 12, 1, true);
 Motor vehicle_arm = Motor(5, 18, A11, 19, 2, true);
 
 ROS2ESP32Bot* ros2esp32bot_node;
@@ -48,7 +48,6 @@ void updateBot(void *pvParameters){
     if(xQueueReceive(_this->command_q, &msg_rx, 0) == pdTRUE){
       // do something
     }
-
     xQueueSend(_this->status_q, &msg_tx, 0);
 
 #if defined(USE_SERIAL_DEBUG)
@@ -60,8 +59,31 @@ void updateBot(void *pvParameters){
 }
 
 void updateActuator(geometry_msgs::Twist* msg){
-  left_wheel.drive(int(msg->linear.x * 255));
-  right_wheel.drive(int(msg->linear.y * 255));
+  const float tread_m = 0.125;
+  const float tire_radius_m = 0.025;
+  const float linear_gain = 0.0235;
+  const float angular_gain = 0.392;
+  const float arm_gain = 2.0;
+
+  float desired_vel_l = (msg->linear.x * linear_gain / tire_radius_m)
+                          - (tread_m / (2.0 * tire_radius_m )) * msg->angular.z * angular_gain;
+  float desired_vel_r = (msg->linear.x * linear_gain/ tire_radius_m)
+                          + (tread_m / (2.0 * tire_radius_m )) * msg->angular.z * angular_gain;
+  float desired_vel_arm = msg->linear.z * arm_gain;
+
+#if defined(USE_SERIAL_DEBUG)
+  Serial.print("motor: ");
+  Serial.print(desired_vel_l);
+  Serial.print(", ");
+  Serial.print(desired_vel_r);
+  Serial.print(", ");
+  Serial.print(desired_vel_arm);
+  Serial.print(", ");
+#endif
+
+  left_wheel.drive(desired_vel_l);
+  right_wheel.drive(desired_vel_r);
+  vehicle_arm.drive(desired_vel_arm);
 }
 
 void updateSensor(geometry_msgs::Vector3* msg){
@@ -70,6 +92,7 @@ void updateSensor(geometry_msgs::Vector3* msg){
   msg->x = cnt;
   msg->y = cnt + 1;
   msg->z = cnt + 2;
+  if (cnt >= 1000.0) cnt = 0.0;
 }
 
 #if defined(USE_SERIAL_DEBUG)

@@ -27,6 +27,7 @@ void ROS2ESP32Bot::publishChatter(std_msgs::String* msg, void* arg){
   (void)(arg);
   static int cnt = 0;
   sprintf(msg->data, "Hello from esp32bot %d", cnt++);
+  if (cnt >= 32767) cnt = 0;
 }
 
 void ROS2ESP32Bot::publishStatus(geometry_msgs::Vector3* msg, void* arg){

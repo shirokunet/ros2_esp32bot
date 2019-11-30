@@ -19,20 +19,14 @@ Motor::Motor(int pin_in1, int pin_in2, int pin_pwm, int pin_standby, int ledc_ch
   ledcAttachPin(pin_pwm_, ledc_channel_);
 }
 
-void Motor::drive(int speed)
+void Motor::drive(float desired_speed)
 {
   digitalWrite(pin_standby_, HIGH);
-
+  int speed = int(desired_speed * 255);
+  speed = minmax(speed, -255, 255);
   if (dir_ == false) speed = -speed;
-
   if (speed >= 0) fwd(speed);
   else rev(-speed);
-}
-
-void Motor::drive(int speed, int duration)
-{
-  drive(speed);
-  delay(duration);
 }
 
 void Motor::fwd(int speed)
@@ -59,4 +53,13 @@ void Motor::brake()
 void Motor::standby()
 {
   digitalWrite(pin_standby_, LOW);
+}
+
+int Motor::minmax(int value, int min, int max){
+  if (value > max)
+    return max;
+  else if (value < min)
+    return min;
+  else
+    return value;
 }
