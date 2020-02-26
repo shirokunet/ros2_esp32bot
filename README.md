@@ -1,6 +1,6 @@
 # ROS2_ESP32Bot
 
-![](https://lh3.googleusercontent.com/_o8eYCek_wowWPqUyYcPlmgHZn2wdGjSYvckrcphoX2S8vozcttgKcpMYjJiTP1c8CLWG5Jg9PYTrsglpluo8gLecdKokHnP2urr8xbRPvxMWnNKt2HccLtOOUYphPJwwXdrCl_9xA)
+![](https://lh3.googleusercontent.com/x5sKEv_RQhGm5qCC-zDFmF9Mf-7K5WzPjpGSWVuvPcdpRqZMKhRcK4JSG6n6v8DPT4hlyWjmBaCpWVXGSWsfrTU7P2oyu0X9WnevnFgQllUyaeGwhWExFSdQxrCVoln-JorZiDvM0A)
 * [YouTube](https://www.youtube.com/watch?v=GBBcU8ohSVk)
 
 
@@ -12,6 +12,7 @@
 
 ## Prepare Hardware
 ### Build a your own bot
+![](https://lh3.googleusercontent.com/_o8eYCek_wowWPqUyYcPlmgHZn2wdGjSYvckrcphoX2S8vozcttgKcpMYjJiTP1c8CLWG5Jg9PYTrsglpluo8gLecdKokHnP2urr8xbRPvxMWnNKt2HccLtOOUYphPJwwXdrCl_9xA)
 ![](https://lh3.googleusercontent.com/9dfobosXR7634ZKSsShJRUWD1uWRhtWJeT9GQ9RfxwCcWsK9J1JGwb6dlRg55y0pI-ZnMj4JBSxdQmKjgZJorxQf4oPs5a-GDD7l-d0fWv8GaHBYe6hCg3x1gJmyMPq3uXyvJGptEA)
 
 I bought below parts.
