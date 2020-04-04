@@ -22,8 +22,10 @@ void setup() {
   Serial.begin(115200);
 #endif
 
+  Serial.print("Try to connect wifi...");
   WiFi.begin(SSID, SSID_PW);
   while(WiFi.status() != WL_CONNECTED);
+  Serial.println("connected");
 
   ros2::init(&udp, AGENT_IP, AGENT_PORT);
   ros2esp32bot_node = new ROS2ESP32Bot();
