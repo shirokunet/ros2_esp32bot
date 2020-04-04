@@ -50,6 +50,18 @@ And write the .ino file into your ESP32.
 $ MicroXRCEAgent udp -p 2018 -v 6
 ```
 
+If you get error messages like below:
+```
+terminate called after throwing an instance of 'std::bad_alloc'
+  what():  std::bad_alloc
+Aborted (core dumped)
+```
+
+Try to run.
+```
+$ LD_PRELOAD="/usr/local/lib/libfastrtps.so.1 /usr/local/lib/libfastcdr.so.1" MicroXRCEAgent udp -p 2018
+```
+
 ### Run joy_node
 ```
 $ ros2 run joy joy_node
