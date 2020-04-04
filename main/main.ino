@@ -20,12 +20,15 @@ WiFiUDP udp;
 void setup() {
 #if defined(USE_SERIAL_DEBUG)
   Serial.begin(115200);
+  Serial.print("Try to connect wifi...");
 #endif
 
-  Serial.print("Try to connect wifi...");
   WiFi.begin(SSID, SSID_PW);
   while(WiFi.status() != WL_CONNECTED);
+
+#if defined(USE_SERIAL_DEBUG)
   Serial.println("connected");
+#endif
 
   ros2::init(&udp, AGENT_IP, AGENT_PORT);
   ros2esp32bot_node = new ROS2ESP32Bot();
